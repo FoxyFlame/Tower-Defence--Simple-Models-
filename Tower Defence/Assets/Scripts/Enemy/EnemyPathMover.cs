@@ -11,11 +11,24 @@ public class EnemyPathMover : MonoBehaviour
 
     void Start()
     {
-        //MoveEnemyToStartPosition();
+        FindPath();
+        MoveEnemyToStartPosition();
         StartCoroutine(MoveToNextWaypoint());
     }
 
-    private void MoveEnemyToStartPosition()
+    void FindPath() 
+    {
+        _path.Clear();
+
+        GameObject[] _parent = GameObject.FindGameObjectsWithTag("Path");
+
+        foreach(GameObject _child in _parent)
+        {
+            _path.Add(_child.GetComponent<Waypoints>());
+        }
+    }
+    
+    void MoveEnemyToStartPosition()
     {
         Vector3 _startPosition = _path[0].transform.position;
         transform.position = _startPosition;
@@ -38,5 +51,7 @@ public class EnemyPathMover : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
+
+        Destroy(gameObject);
     }
 }

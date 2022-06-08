@@ -55,9 +55,13 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -2432090755550338912, guid: 626410dc07212d749823da2540a223bb, type: 3}
+    - target: {fileID: 5141048445896882818, guid: dbc53d64843e6f748a3f0d9c55376b14, type: 3}
+      propertyPath: _isPlaceable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6748003959188922859, guid: dbc53d64843e6f748a3f0d9c55376b14, type: 3}
       propertyPath: m_Name
-      value: Tile_Corner_DownRight
+      value: Tile_RoadCorner_UpRight
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbc53d64843e6f748a3f0d9c55376b14, type: 3}
