@@ -9,7 +9,7 @@ public class EnemyPathMover : MonoBehaviour
     [SerializeField] [Range(0f, 5f)] float _speedMovement = 1f;
     //[SerializeField] float _waitTime = 1f;
 
-    void Start()
+    void OnEnable()
     {
         FindPath();
         MoveEnemyToStartPosition();
@@ -52,6 +52,6 @@ public class EnemyPathMover : MonoBehaviour
             }
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

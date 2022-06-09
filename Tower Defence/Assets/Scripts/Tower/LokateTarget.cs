@@ -9,7 +9,7 @@ public class LokateTarget : MonoBehaviour
 
     void Start()
     {
-        _target = FindObjectOfType<EnemyPathMover>().transform;
+        //FndNewTarget();
     }
 
     void Update()
@@ -18,6 +18,15 @@ public class LokateTarget : MonoBehaviour
     }
     void AimWeaponToTarget()
     {
+        if(_target == null)
+        {
+            FindNewTarget();
+        }
         _weapon.LookAt(_target.transform.position);
+    }
+
+    void FindNewTarget()
+    {
+        _target = FindObjectOfType<EnemyPathMover>().transform;
     }
 }
