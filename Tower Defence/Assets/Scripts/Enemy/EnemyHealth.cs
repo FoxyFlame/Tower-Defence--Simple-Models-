@@ -6,11 +6,14 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int _maxHealth = 5;
-    int _currentHealth = 0;
+    [SerializeField] int _currentHealth = 0;
+
+    LokateTarget _lokateTarget;
 
     void OnEnable()
     {
         _currentHealth = _maxHealth;
+        _lokateTarget = GetComponent<LokateTarget>();
     }
 
     void OnParticleCollision(GameObject other)
@@ -25,6 +28,7 @@ public class EnemyHealth : MonoBehaviour
         if(_currentHealth <= 0)
         {
             gameObject.SetActive(false);
+            _lokateTarget.AreEnemyDestroyed(true); // ????
         }
     }
 }

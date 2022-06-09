@@ -30,6 +30,7 @@ public class ObjectPool : MonoBehaviour
         {
             _pool[i] = Instantiate(_enemyObject, transform);
             _pool[i].SetActive(false);
+           
         }
     }
 
