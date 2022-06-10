@@ -10,7 +10,6 @@ public class LokateTarget : MonoBehaviour
     [SerializeField] ParticleSystem _projectParticles;
     [SerializeField] float _towerRange = 2f;
 
-    bool _enemyAreDestroyed = false;
     void Update()
     {
         FindClosestTarget();
@@ -23,7 +22,7 @@ public class LokateTarget : MonoBehaviour
         Transform _closestTarget = null;
         float _maxDistance = Mathf.Infinity;
         float _actualDistance = Mathf.Infinity;
-        float _targetDistance = 0;
+        float _targetDistance;
 
         foreach (Enemy _enemy in _enemies)
         {
@@ -40,22 +39,19 @@ public class LokateTarget : MonoBehaviour
         {
             _target = _closestTarget;
         }
+        else
+        {
+            _actualDistance = Vector3.Distance(transform.position, _target.position);
+        }
 
-        _actualDistance = Vector3.Distance(transform.position, _target.position);
-        //Debug.Log(_target.GetComponent<EnemyPathMover>().enabled); jak zmienic target jak go pokona
-
-        if (_actualDistance > _towerRange || _enemyAreDestroyed)
+        if (_actualDistance > _towerRange || _target.GetComponent<EnemyHealth>().GetCurrentHealth() <= 0)
         {
             _target = _closestTarget;
-            AreEnemyDestroyed(false);
-            Debug.Log("Ready for new target");
         }
     }
 
     void AimWeaponToTarget()
     {
-        //if(!_target) { return; }
-
         float _targetDistance = Vector3.Distance(transform.position, _target.position);
 
         _weapon.LookAt(_target);
@@ -74,10 +70,5 @@ public class LokateTarget : MonoBehaviour
     {
         var _emissionModule = _projectParticles.emission;
         _emissionModule.enabled = _isActive;
-    }
-
-    public void AreEnemyDestroyed(bool _enemyEgzistance)
-    {
-        _enemyAreDestroyed = _enemyEgzistance;
     }
 }

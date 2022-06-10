@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3049131714819384361}
   - component: {fileID: 2557286990329968976}
+  - component: {fileID: 9111133220734849998}
   m_Layer: 0
   m_Name: Ballista
   m_TagString: Untagged
@@ -50,6 +51,19 @@ MonoBehaviour:
   _weapon: {fileID: 3144582324300694500}
   _projectParticles: {fileID: 2766882858585996261}
   _towerRange: 2
+--- !u!114 &9111133220734849998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3219458064393657486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6efd7a7e693ed9844b0df877a18947f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cost: 75
 --- !u!1 &6131056645070147807
 GameObject:
   m_ObjectHideFlags: 0

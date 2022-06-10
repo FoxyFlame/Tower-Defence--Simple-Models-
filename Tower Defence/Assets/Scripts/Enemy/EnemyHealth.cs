@@ -8,17 +8,25 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] int _maxHealth = 5;
     [SerializeField] int _currentHealth = 0;
 
-    LokateTarget _lokateTarget;
-
+    Enemy _enemy;
     void OnEnable()
     {
         _currentHealth = _maxHealth;
-        _lokateTarget = GetComponent<LokateTarget>();
+    }
+
+    void Start()
+    {
+        _enemy = GetComponent<Enemy>();
     }
 
     void OnParticleCollision(GameObject other)
     {
         AfterHit();
+    }
+
+    public int GetCurrentHealth()
+    {
+        return _currentHealth;
     }
 
     void AfterHit()
@@ -28,7 +36,7 @@ public class EnemyHealth : MonoBehaviour
         if(_currentHealth <= 0)
         {
             gameObject.SetActive(false);
-            _lokateTarget.AreEnemyDestroyed(true); // ????
+            _enemy.RewardGold();
         }
     }
 }

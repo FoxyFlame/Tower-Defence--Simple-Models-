@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49a7336e0b9058b40a97e31471d37718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tower: {fileID: 9111133220734849998, guid: 8a965e088bae16643aab3d07ccfd5e2e, type: 3}
   _isPlaceable: 1
-  _tower: {fileID: 3219458064393657486, guid: 8a965e088bae16643aab3d07ccfd5e2e, type: 3}
 --- !u!65 &5410987702918189666
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -330,3 +330,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88dfcab05e8893b4c82179bc0623351f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mainColor: {r: 0, g: 0, b: 0, a: 1}
+  _blockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
