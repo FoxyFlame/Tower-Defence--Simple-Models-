@@ -10,6 +10,13 @@ public class LokateTarget : MonoBehaviour
     [SerializeField] ParticleSystem _projectParticles;
     [SerializeField] float _towerRange = 2f;
 
+    ObjectPool _objectPool;
+
+    void Start()
+    {
+        _objectPool = FindObjectOfType<ObjectPool>();
+    }
+
     void Update()
     {
         FindClosestTarget();
@@ -52,13 +59,20 @@ public class LokateTarget : MonoBehaviour
 
     void AimWeaponToTarget()
     {
-        float _targetDistance = Vector3.Distance(transform.position, _target.position);
-
-        _weapon.LookAt(_target);
-
-        if(_targetDistance < _towerRange)
+        if (_objectPool.GetToogleCreateNewEnemies())
         {
-            AttactWhenTarget(true);
+            float _targetDistance = Vector3.Distance(transform.position, _target.position);
+
+            _weapon.LookAt(_target);
+
+            if (_targetDistance < _towerRange)
+            {
+                AttactWhenTarget(true);
+            }
+            else
+            {
+                AttactWhenTarget(false);
+            }
         }
         else
         {

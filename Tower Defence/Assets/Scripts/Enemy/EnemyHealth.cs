@@ -39,4 +39,9 @@ public class EnemyHealth : MonoBehaviour
             _enemy.RewardGold();
         }
     }
+
+    public void SetNewMaxHealth(int _newMaxHealth)
+    {
+        _maxHealth = _newMaxHealth;
+    }
 }
