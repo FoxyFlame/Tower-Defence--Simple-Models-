@@ -59,7 +59,7 @@ public class LokateTarget : MonoBehaviour
 
     void AimWeaponToTarget()
     {
-        if (_objectPool.GetToogleCreateNewEnemies())
+        if (_target != null)
         {
             float _targetDistance = Vector3.Distance(transform.position, _target.position);
 

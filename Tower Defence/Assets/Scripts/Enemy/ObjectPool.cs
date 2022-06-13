@@ -7,7 +7,7 @@ public class ObjectPool : MonoBehaviour
 {
     [SerializeField] GameObject _enemyObject;
     [SerializeField] int _poolSize = 10;
-    [SerializeField] [Range(0f, 5f)] float _spawnTimer = 2f;
+    [SerializeField] [Range(0f, 5f)] public float _spawnTimer = 2f;
 
     float _waitTimeBetwenWaves = 15f;
 
@@ -16,20 +16,23 @@ public class ObjectPool : MonoBehaviour
 
     GameObject[] _pool;
 
-    bool _toogleCreateNewEnemies = true;
     int _countOfCreatedEnemies = 0;
 
     void Awake()
     {
         PopulatePool();
+
     }
     void Start()
     {
-        _waveMenager = FindObjectOfType<WaveMenager>();
         _lokateTargets = FindObjectsOfType<LokateTarget>();
-        StartCoroutine(EnemyLoopForLevel());        
     }
 
+    void OnEnable()
+    {
+        _waveMenager = FindObjectOfType<WaveMenager>();
+        StartCoroutine(EnemyLoopForLevel());
+    }
     void PopulatePool()
     {
         _pool = new GameObject[_poolSize];
@@ -43,20 +46,21 @@ public class ObjectPool : MonoBehaviour
 
     IEnumerator EnemyLoopForLevel()
     {
-        EnableObjectInPool();
-        Debug.Log("Wykonuje");
-        if (_countOfCreatedEnemies >= _waveMenager.GetMaxEnemiesByWave())
+        while(true)
         {
-            _waveMenager.NewWave();
-            ResetEnemiesCount();
-            ToogleCreateNewEnemies();
-            Debug.Log("Czekam");
-            yield return new WaitForSeconds(_waitTimeBetwenWaves);
-            ToogleCreateNewEnemies();
-            Debug.Log("Poczeka³em");
-        }
+            int _maxEnemies = _waveMenager.GetMaxEnemiesByWave();
 
-        yield return new WaitForSeconds(_spawnTimer);
+            if (_countOfCreatedEnemies >= _maxEnemies && _maxEnemies != null)
+            {
+                _waveMenager.NewWave();
+                ResetEnemiesCount();
+                yield return new WaitForSeconds(_waitTimeBetwenWaves);
+            }
+
+            EnableObjectInPool();
+
+            yield return new WaitForSeconds(_spawnTimer);
+        }
     }
 
     void EnableObjectInPool()
@@ -66,7 +70,7 @@ public class ObjectPool : MonoBehaviour
             if(_pool[i].activeInHierarchy == false)
             {
                 _pool[i].SetActive(true);
-                Debug.Log(_countOfCreatedEnemies);
+                _waveMenager.WavesOptions();
                 _countOfCreatedEnemies++;
                 return;
             }
@@ -76,15 +80,5 @@ public class ObjectPool : MonoBehaviour
     public void ResetEnemiesCount()
     {
         _countOfCreatedEnemies = 0;
-    }
-
-    void ToogleCreateNewEnemies()
-    {
-        _toogleCreateNewEnemies = !_toogleCreateNewEnemies;
-    }
-
-    public bool GetToogleCreateNewEnemies()
-    {
-        return _toogleCreateNewEnemies;
     }
 }

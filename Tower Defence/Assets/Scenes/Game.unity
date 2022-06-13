@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxWave: 7
-  _currentWave: 0
+  _currentWave: 1
 --- !u!1001 &51769965
 PrefabInstance:
   m_ObjectHideFlags: 0
