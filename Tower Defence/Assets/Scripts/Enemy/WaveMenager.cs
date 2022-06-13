@@ -9,9 +9,11 @@ public class WaveMenager : MonoBehaviour
 
     ObjectPool _objectPool;
     EnemyHealth[] _enemyHealths;
+    EnemyPathMover[] _enemyPathMovers;
 
     int _maxEnemiesCountByWave = 10;
     int _newMaxHealth = 5;
+    float _newSpeed = 1f;
 
     void Start()
     {
@@ -22,6 +24,7 @@ public class WaveMenager : MonoBehaviour
     public void WavesOptions()
     {
         _enemyHealths = FindObjectsOfType<EnemyHealth>();
+        _enemyPathMovers = FindObjectsOfType<EnemyPathMover>();
 
         if (_currentWave > _maxWave)
         {
@@ -45,23 +48,32 @@ public class WaveMenager : MonoBehaviour
                 break;
             case 4:
                 _maxEnemiesCountByWave = 20;
+                _newSpeed = 0.75f;
                 break;
             case 5:
                 _maxEnemiesCountByWave = 25;
+                _objectPool._spawnTimer = 1.25f;
                 break;
             case 6:
                 _maxEnemiesCountByWave = 25;
                 _newMaxHealth = 10;
                 break;
             case 7:
-                _maxEnemiesCountByWave = 5;
-                _newMaxHealth = 25;
+                _maxEnemiesCountByWave = 3;
+                _newMaxHealth = 75;
+                _newSpeed = 0.25f;
+                _objectPool._spawnTimer = 2f;
                 break;
         }
 
         foreach (EnemyHealth _enemyHealth in _enemyHealths)
         {
             _enemyHealth.SetNewMaxHealth(_newMaxHealth);
+        }
+
+        foreach (EnemyPathMover _enemyPathMover in _enemyPathMovers)
+        {
+            _enemyPathMover.SetNewSpeed(_newSpeed);
         }
     }
 

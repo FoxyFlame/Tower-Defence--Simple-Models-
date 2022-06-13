@@ -41,6 +41,11 @@ public class EnemyPathMover : MonoBehaviour
         transform.position = _startPosition;
     }
 
+    public void SetNewSpeed(float _newSpeed)
+    {
+        _speedMovement = _newSpeed;
+    }
+
     IEnumerator MoveToNextWaypoint()
     {
         foreach(Waypoints _waypoint in _path)
