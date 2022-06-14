@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 5
+  _currentHealth: 0
 --- !u!114 &5432197273558261924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,3 +172,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c5ecbc2003b6e4ca560976e6c5fee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rewardForKill: 25
+  _stealMoneyByEnemy: 35

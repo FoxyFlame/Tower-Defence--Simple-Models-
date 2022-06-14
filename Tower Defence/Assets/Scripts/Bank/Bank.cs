@@ -6,9 +6,13 @@ using TMPro;
 
 public class Bank : MonoBehaviour
 {
-    [SerializeField] int _startingBalance = 150;
+    [SerializeField] int _startingBalance = 100;
+    [SerializeField] int _costOfTower = 25;
     [SerializeField] int _currentBalance;
     [SerializeField] TextMeshProUGUI _displayBalance;
+    [SerializeField] TextMeshProUGUI _displayCostOfNewTower;
+
+    int _costRiseForNextTower = 45;
 
     private void Awake()
     {
@@ -29,11 +33,24 @@ public class Bank : MonoBehaviour
         _currentBalance -= Mathf.Abs(_amount);
         UpdateDisplayBalance();
 
+
         if (_currentBalance < -100)
         {
             //Loose the game
             ReloadScene();
         }
+    }
+
+    public void WidrawForTower()
+    {
+        Widraw(_costOfTower);
+        _costOfTower += _costRiseForNextTower;
+        UpdateDisplayBalance();
+    }
+
+    public int GetCostOfNewTower()
+    {
+        return _costOfTower;
     }
 
     void ReloadScene()
@@ -45,5 +62,6 @@ public class Bank : MonoBehaviour
     void UpdateDisplayBalance()
     {
         _displayBalance.text = "Gold: " + _currentBalance.ToString();
+        _displayCostOfNewTower.text = "New Tower Cost: " + _costOfTower;
     }
 }

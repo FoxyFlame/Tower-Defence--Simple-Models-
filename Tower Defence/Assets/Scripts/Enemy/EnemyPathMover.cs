@@ -27,11 +27,15 @@ public class EnemyPathMover : MonoBehaviour
     {
         _path.Clear();
 
-        GameObject[] _parent = GameObject.FindGameObjectsWithTag("Path");
+        GameObject _parent = GameObject.FindGameObjectWithTag("Path");
 
-        foreach(GameObject _child in _parent)
+        foreach(Transform _child in _parent.transform)
         {
-            _path.Add(_child.GetComponent<Waypoints>());
+            Waypoints _waypoints = _child.GetComponent<Waypoints>();
+            if ( _waypoints != null)
+            {
+                _path.Add(_waypoints);
+            }
         }
     }
     
@@ -44,6 +48,12 @@ public class EnemyPathMover : MonoBehaviour
     public void SetNewSpeed(float _newSpeed)
     {
         _speedMovement = _newSpeed;
+    }
+
+    void FinishPath()
+    {
+        _enemy.StealGold();
+        gameObject.SetActive(false);
     }
 
     IEnumerator MoveToNextWaypoint()
@@ -64,7 +74,6 @@ public class EnemyPathMover : MonoBehaviour
             }
         }
 
-        _enemy.StealGold();
-        gameObject.SetActive(false);
+        FinishPath();
     }
 }

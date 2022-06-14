@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WaveMenager : MonoBehaviour
 {
@@ -28,7 +29,18 @@ public class WaveMenager : MonoBehaviour
 
         if (_currentWave > _maxWave)
         {
-            // U WIN GAME
+            int _currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
+            int _nextSceneIndex = _currentLevelIndex + 1;
+
+            if (_nextSceneIndex > SceneManager.sceneCountInBuildSettings)
+            {
+                SceneManager.LoadScene(0);
+                return; //U WIN GAME
+            }
+            else
+            {
+                SceneManager.LoadScene(_nextSceneIndex);
+            }
         }
 
         switch (_currentWave)
@@ -36,7 +48,6 @@ public class WaveMenager : MonoBehaviour
             case 1:
                 _maxEnemiesCountByWave = 10;
                 _newMaxHealth = 5;
-                Debug.Log(_maxEnemiesCountByWave + " " + _newMaxHealth);
                 break;
             case 2:
                 _maxEnemiesCountByWave = 15;
@@ -48,7 +59,7 @@ public class WaveMenager : MonoBehaviour
                 break;
             case 4:
                 _maxEnemiesCountByWave = 20;
-                _newSpeed = 0.75f;
+                _newSpeed = 1.75f;
                 break;
             case 5:
                 _maxEnemiesCountByWave = 25;
@@ -60,8 +71,8 @@ public class WaveMenager : MonoBehaviour
                 break;
             case 7:
                 _maxEnemiesCountByWave = 3;
-                _newMaxHealth = 75;
-                _newSpeed = 0.25f;
+                _newMaxHealth = 100;
+                _newSpeed = 0.75f;
                 _objectPool._spawnTimer = 2f;
                 break;
         }

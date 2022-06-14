@@ -50,7 +50,7 @@ public class ObjectPool : MonoBehaviour
         {
             int _maxEnemies = _waveMenager.GetMaxEnemiesByWave();
 
-            if (_countOfCreatedEnemies >= _maxEnemies && _maxEnemies != null)
+            if (_countOfCreatedEnemies >= _maxEnemies) //  && _maxEnemies != null
             {
                 ResetEnemiesCount();
                 yield return new WaitForSeconds(_waitTimeBetwenWaves);

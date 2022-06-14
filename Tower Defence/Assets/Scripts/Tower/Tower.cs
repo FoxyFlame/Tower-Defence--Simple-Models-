@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    [SerializeField] int _costOfTower = 75;
-
     public bool CreateTower(Tower _tower, Vector3 _position)
     {
         Bank _bank = FindObjectOfType<Bank>();
@@ -15,10 +13,10 @@ public class Tower : MonoBehaviour
             return false;
         }
 
-        if(_bank._CurrentBalance >= _costOfTower)
+        if(_bank._CurrentBalance >= _bank.GetCostOfNewTower())
         {
             Instantiate(_tower, _position, Quaternion.identity);
-            _bank.Widraw(_costOfTower);
+            _bank.WidrawForTower();
             return true;
         }
 
