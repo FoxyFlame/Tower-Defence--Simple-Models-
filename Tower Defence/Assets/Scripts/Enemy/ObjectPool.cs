@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ObjectPool : MonoBehaviour
 {
@@ -53,7 +54,12 @@ public class ObjectPool : MonoBehaviour
             if (_countOfCreatedEnemies >= _maxEnemies) //  && _maxEnemies != null
             {
                 ResetEnemiesCount();
-                yield return new WaitForSeconds(_waitTimeBetwenWaves);
+
+                if(SceneManager.GetActiveScene().buildIndex != 0)
+                {
+                    yield return new WaitForSeconds(_waitTimeBetwenWaves);
+                }
+
                 _waveMenager.NewWave();
             }
 

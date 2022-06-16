@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,43 +28,36 @@ public class WaveMenager : MonoBehaviour
         _enemyHealths = FindObjectsOfType<EnemyHealth>();
         _enemyPathMovers = FindObjectsOfType<EnemyPathMover>();
 
-        if (_currentWave > _maxWave)
-        {
-            int _currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
-            int _nextSceneIndex = _currentLevelIndex + 1;
+        MenuInfininiteWorking();
 
-            if (_nextSceneIndex > SceneManager.sceneCountInBuildSettings)
-            {
-                SceneManager.LoadScene(0);
-                return; //U WIN GAME
-            }
-            else
-            {
-                SceneManager.LoadScene(_nextSceneIndex);
-            }
-        }
+        ChangeScene();
 
         switch (_currentWave)
         {
             case 1:
                 _maxEnemiesCountByWave = 10;
                 _newMaxHealth = 5;
+                Debug.Log("1");
                 break;
             case 2:
                 _maxEnemiesCountByWave = 15;
                 _objectPool._spawnTimer = 1.5f;
+                Debug.Log("2");
                 break;
             case 3:
                 _maxEnemiesCountByWave = 15;
                 _newMaxHealth = 7;
+                Debug.Log("3");
                 break;
             case 4:
                 _maxEnemiesCountByWave = 20;
                 _newSpeed = 1.75f;
+                Debug.Log("5");
                 break;
             case 5:
                 _maxEnemiesCountByWave = 25;
                 _objectPool._spawnTimer = 1.25f;
+                Debug.Log("6");
                 break;
             case 6:
                 _maxEnemiesCountByWave = 25;
@@ -73,6 +67,12 @@ public class WaveMenager : MonoBehaviour
                 _maxEnemiesCountByWave = 3;
                 _newMaxHealth = 100;
                 _newSpeed = 0.75f;
+                _objectPool._spawnTimer = 2f;
+                break;
+            default:
+                _maxEnemiesCountByWave = 10;
+                _newMaxHealth = 5;
+                _newSpeed = 1f;
                 _objectPool._spawnTimer = 2f;
                 break;
         }
@@ -85,6 +85,34 @@ public class WaveMenager : MonoBehaviour
         foreach (EnemyPathMover _enemyPathMover in _enemyPathMovers)
         {
             _enemyPathMover.SetNewSpeed(_newSpeed);
+        }
+    }
+
+    private void ChangeScene()
+    {
+        if (_currentWave > _maxWave)
+        {
+            int _currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
+            int _nextSceneIndex = _currentLevelIndex + 1;
+
+            if (_nextSceneIndex > SceneManager.sceneCountInBuildSettings)
+            {
+                SceneManager.LoadScene(0);
+                return; //U WIN GAME RETURN MENU
+            }
+            else
+            {
+                SceneManager.LoadScene(_nextSceneIndex);
+            }
+        }
+    }
+
+    private void MenuInfininiteWorking()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            _currentWave = 1;
+            return;
         }
     }
 
